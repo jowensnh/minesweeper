@@ -13,17 +13,21 @@ public class Cell {
     public Cell(int positionX, int positionY, int width, int height) {
         button = new JButton();
         button.setBounds(positionX, positionY, width, height);
-        button.addActionListener(new ActionListener() {
+        /*button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (isMine) {
                     button.setText("Boom");
                 } else if (numNeighborBombs > 0){
                     button.setText(String.valueOf(numNeighborBombs));
+                } else {
+
                 }
             }
-        });
+        });*/
     }
+
+
 
     public void setMine(){
         isMine = true;

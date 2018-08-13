@@ -1,8 +1,12 @@
 package com.jerryowens.minesweeper;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class PlayField {
+public class PlayField extends JPanel {
     private int row;
     private int column;
     private int numMines;
@@ -11,20 +15,22 @@ public class PlayField {
         this.column = column;
         this.numMines = numMines;
 
+        this.addMouseListener(new MinesAdapater());
+        this.createField();
     }
 
-    public Cell[][] createField (JFrame frame) {
+    public Cell[][] createField () {
         Cell[][] field = new Cell[this.row][this.column];
         int startX = 40;
 
         for (int x = 0; x < this.row; x++) {
             int startY = 65;
             for (int y = 0; y < this.column; y++){
-                field[x][y] = new Cell(startX, startY, 50, 50);
-                frame.add(field[x][y].getButton());
-                startY = startY + 52;
+                field[x][y] = new Cell(startX, startY, 50, 100);
+                this.add(field[x][y].getButton());
+                startY = startY + 50;
             }
-            startX = startX + 52;
+            startX = startX + 50;
         }
         for (int i = 0; i < this.numMines; i++) {
             boolean bombPlaced = false;
@@ -70,4 +76,12 @@ public class PlayField {
 
         return field;
     }
+
+    class MinesAdapater extends MouseAdapter {
+        public void mousePressed (MouseEvent event) {
+            System.out.println(event.getX() + " " + event.getY());
+        }
+    }
+
 }
+
